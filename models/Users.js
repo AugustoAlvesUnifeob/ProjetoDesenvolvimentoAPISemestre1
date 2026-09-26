@@ -23,7 +23,11 @@ const User = conn.define('users',{
     phone:{
         type: DataTypes.STRING,
         required: true
-    }
+    },
+    tipo:{
+        type: DataTypes.STRING,
+        required: true
+}
 })
 
 module.exports = User
