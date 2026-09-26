@@ -18,7 +18,7 @@ const Product = conn.define('products',{
         required: true
     },
     stock:{
-        type: DataTypes.INT,
+        type: DataTypes.INTEGER,
     }
 })
 
