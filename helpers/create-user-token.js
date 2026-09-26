@@ -6,7 +6,8 @@ const jwt = require('jsonwebtoken')
 const createUserToken = async(user, req, res)=>{
     const token = jwt.sign({
         name: user.name,
-        id: user.id
+        id: user.id,
+        tipo: user.tipo
     }, process.env.CHAVETOKEN)
 
     //retornamos o token
