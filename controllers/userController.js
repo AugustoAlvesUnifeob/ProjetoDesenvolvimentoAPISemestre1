@@ -7,7 +7,7 @@ const createUserToken = require('../helpers/create-user-token')
 
 module.exports = class UserController{
     static async register(req, res){
-        const {name, email, password, image, phone} = req.body
+        const {name, email, password, image, phone, tipo} = req.body
 
         //verificar se o usuário já exite
         const userExists = await User.findOne({where:{email:email}})
@@ -29,18 +29,19 @@ module.exports = class UserController{
                 name: name,
                 email: email,
                 password: passwordHash,
-                phone: phone
+                phone: phone,
+                tipo: tipo
             })
             res.status(200).json({message:'Usuario cadastrado com sucesso'})
         } catch (error) {
             res.status(500).json({message: error})
-        }    
+        }
     }
     //metado para listar todos os usuarios
     static async listAll(req, res){
         try {
             const users = await User.findAll()
-            res.status(200).json({users})    
+            res.status(200).json({users})
         } catch (error) {
             res.status(500).json({error: error})
         }
@@ -63,10 +64,10 @@ module.exports = class UserController{
         }
 
         //verificar o password
-        const checkPassord = await bcrypt.compare(password, user.password)
+        const checkPassword = await bcrypt.compare(password, user.password)
 
         //retornar a mensagem para senha incorreta
-        if(!checkPassord){
+        if(!checkPassword){
             res.status(422).json({
                 message:"Senha Invalida"
             })
@@ -89,13 +90,13 @@ module.exports = class UserController{
                 return res.status(404).json({message: "usuário não encontrado"})
             }
 
-            let passwordHash
+            let passwordHash = userExists.password
 
             //só se a senha vier
-            if(senha){
+            if(password){
                 //criptografar senha
                 const salt = await bcrypt.genSalt(12)
-                passwordHash = await bcrypt.hash(senha, salt)
+                passwordHash = await bcrypt.hash(password, salt)
             }
 
             await User.update(
