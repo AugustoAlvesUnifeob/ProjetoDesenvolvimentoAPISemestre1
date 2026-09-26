@@ -14,8 +14,6 @@ const verifyToken = require('../helpers/verify-token.js')
 route.post('/register',registerValidationRules(),validate,productController.register)
 //Listar todos
 route.get('/', verifyToken, productController.listAll)
-//rota de login
-route.post('/login', productController.login)
 //rota de update
 route.post('/update/:id', verifyToken, productController.update)
 //rota de delete
