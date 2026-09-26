@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 
 //parametros de conexão
 const conn = new Sequelize(
-    'db_get_a_pet',
+    'projetoCarrinho',
     'root',
     '12345678',{
         host:'localhost',

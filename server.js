@@ -8,8 +8,10 @@ const cors = require('cors')
 const conn = require('./db/conn')
 //requerer os Models
 const User = require('./models/Users')
-//requerer a rotas dos usuarios (user)
+const Product = require('./models/Products')
+//requerer a rotas
 const userRoutes = require('./routes/userRotues')
+const productRoutes = require('./routes/productRotues')
 
 //Configurando JSON response
 api.use(express.json())
@@ -18,6 +20,7 @@ api.use(express.json())
 api.use(cors({ credentials: true, origin: 'http://localhost:3030' }))
 
 api.use('/users',userRoutes)
+api.use('/products',productRoutes)
 
 //start api
 conn.sync()

@@ -77,4 +77,55 @@ module.exports = class UserController{
         await createUserToken(user, req, res)
     }
 
+    static async update(req, res){
+        const {id} = req.params //id do usuario na url
+        const {name, email, password, image, phone} = req.body
+
+        //atualizar usuario
+        try{
+            //procurar usuario pelo id
+            const userExists = await User.findByPk(id)
+            if(!userExists){
+                return res.status(404).json({message: "usuário não encontrado"})
+            }
+
+            let passwordHash
+
+            //só se a senha vier
+            if(senha){
+                //criptografar senha
+                const salt = await bcrypt.genSalt(12)
+                passwordHash = await bcrypt.hash(senha, salt)
+            }
+
+            await User.update(
+                {
+                    name: name,
+                    email: email,
+                    password: passwordHash,
+                    phone: phone
+                },
+                {
+                    where: {id: id}
+                }
+            )
+            res.status(200).json({message:'Usuario alterado com sucesso'})
+        }catch(error){
+            res.status(500).json({message: error})
+        }
+    }
+
+    static async delete(req, res){
+        const {id} = req.params //id do usuario na url
+        try{
+            await User.destroy({
+                where: {id: id}
+            })
+            res.status(200).json({message:'Usuario deletado com sucesso'})
+        }
+        catch(error){
+            res.status(500).json({message: error})
+        }
+    }
+
 }
