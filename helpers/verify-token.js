@@ -22,7 +22,7 @@ const checkToken = (req, res, next)=>{
     //3-verificar validade do token
     try{
         const verified = jwt.verify(token, process.env.CHAVETOKEN)
-        req.user = jwt.verified
+        req.user = verified
         next()
     }
     catch(error){

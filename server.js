@@ -11,7 +11,7 @@ const User = require('./models/Users')
 const Product = require('./models/Products')
 //requerer a rotas
 const userRoutes = require('./routes/userRotues')
-const productRoutes = require('./routes/productRotues')
+const productRoutes = require('./routes/productRoutes')
 
 //Configurando JSON response
 api.use(express.json())
