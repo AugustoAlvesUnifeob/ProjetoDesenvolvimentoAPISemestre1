@@ -12,6 +12,7 @@ const Product = require('./models/Products')
 //requerer a rotas
 const userRoutes = require('./routes/userRotues')
 const productRoutes = require('./routes/productRoutes')
+const cartRoutes = require('./routes/cartRoutes')
 
 //Configurando JSON response
 api.use(express.json())
@@ -21,6 +22,7 @@ api.use(cors({ credentials: true, origin: 'http://localhost:3030' }))
 
 api.use('/users',userRoutes)
 api.use('/products',productRoutes)
+api.use('/cart',cartRoutes)
 
 //start api
 conn.sync()

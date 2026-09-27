@@ -9,7 +9,7 @@ const {registerValidationRules, validate} = require('../helpers/userValidator')
 //requerer a validação do token
 const verifyToken = require('../helpers/verify-token.js')
 
-//Rotas
+
 //Register
 route.post('/register',registerValidationRules(),validate,userController.register)
 //Listar todos

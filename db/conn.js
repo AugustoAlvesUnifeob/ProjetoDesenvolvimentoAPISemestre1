@@ -5,7 +5,7 @@ const Sequelize = require('sequelize')
 const conn = new Sequelize(
     'projetoCarrinho',
     'root',
-    '12345678',{
+    '',{
         host:'localhost',
         dialect:'mysql',
         port:3306
